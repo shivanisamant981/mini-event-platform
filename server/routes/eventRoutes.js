@@ -94,4 +94,39 @@ router.delete("/:id",authMiddleware,async(req,res)=>{
     }
     
 });
+
+router.post("/:id/rsvp",authMiddleware,async(req,res)=>{
+    try{
+        const eventId=req.params.id;
+        const userId=req.user.id;
+
+        const event=await Event.findOneAndUpdate(
+            {
+                _id:eventId,
+                $expr:{$lt:["$attendeesCount","$capacity"]},//normally mongodb queries compare field to value 
+                attendees:{$ne:userId}, //but $expr lets us compare to field to field
+
+            },
+            {
+                $inc:{attendeesCount:1},
+                $push:{attendees:userId}, //add user to attendees array
+            },
+            {new:true} //return the updated event // without this mongodb would return the old version
+        );
+        if(!event){
+            return res.status(400).json({
+                message:"Event is full or user already joined come next year",
+            });
+        }
+        res.json({
+            message:"successfully joined the event",
+            event,
+        });
+    }catch(error){
+        res.status(500).json({message:error.message});
+    }
+
+});
+
+
 module.exports=router;
