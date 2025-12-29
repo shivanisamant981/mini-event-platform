@@ -4,7 +4,9 @@ const app=express();
 const cors=require("cors");
 const connectDB = require("./config/db");
 require("dotenv").config();
-const authRoutes=require("./routes/authRoutes")
+const authRoutes=require("./routes/authRoutes");
+const eventRoutes=require("./routes/eventRoutes")
+const authMiddleware = require("./middleware/authMiddleware");
 app.use(cors());
 app.use(express.json());
 
@@ -16,6 +18,14 @@ app.get("/test",(req,res)=>{
 })
 connectDB()
 app.use("/api/auth",authRoutes);
+app.use("/api/event",eventRoutes);
+
+app.get("/api/protected",authMiddleware,(req,res)=>{
+    res.json({
+        message:"Access granted",
+        userId:req.user.id,
+    });
+});
 
 
 
