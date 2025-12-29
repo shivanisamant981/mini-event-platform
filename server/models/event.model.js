@@ -1,4 +1,4 @@
-const mogoose=require("mongoose");
+const mongoose=require("mongoose");
 
 const eventSchema=mongoose.Schema({
     title:{
@@ -27,7 +27,7 @@ const eventSchema=mongoose.Schema({
     },
     attendees:[
         {
-            type:mognoose.Schema.Types.ObjectId,
+            type:mongoose.Schema.Types.ObjectId,
             ref:"User",
         },
     ],
