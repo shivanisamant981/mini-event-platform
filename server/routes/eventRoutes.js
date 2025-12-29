@@ -128,5 +128,38 @@ router.post("/:id/rsvp",authMiddleware,async(req,res)=>{
 
 });
 
+router.delete("/:id/rsvp",authMiddleware,async(req,res)=>{
+    try{
+        const eventId=req.params.id;
+        const userId=req.user.id;
+
+        const event=await Event.findOneAndUpdate(
+            {
+                _id:eventId,
+                attendees:userId,
+            },
+            {
+                $pull:{attendees:userId},
+                $inc:{attendeesCount:-1},
+            },
+            {
+                new:true
+            }
+        )
+        if(!event){
+            return res.status(400).json({
+                message:"User is not part of this event",
+            });
+        }
+        res.json({
+            message:"successfully left the event",
+            event,
+        });
+
+    }catch(error){
+        res.status(500).json({message:error.message});
+    }
+});
+
 
 module.exports=router;
