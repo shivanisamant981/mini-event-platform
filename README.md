@@ -16,7 +16,7 @@ It allows users to create events, view upcoming events, and RSVP to events while
 PORT=5000
 MONGODB_URI=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret_key
-
+---
 
 ### Prerequisites
 Make sure the following are installed on your system:
