@@ -12,7 +12,7 @@ It allows users to create events, view upcoming events, and RSVP to events while
 
 ## list of environment variable for the backend
 
-```bash
+
 PORT=5000
 MONGODB_URI=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret_key
