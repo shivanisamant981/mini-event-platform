@@ -6,9 +6,35 @@
 The **Mini Event Platform** is a full-stack web application built using the **MERN stack (MongoDB, Express.js, React.js, Node.js)**.  
 It allows users to create events, view upcoming events, and RSVP to events while strictly enforcing event capacity and handling concurrency to prevent overbooking.
 
-This project was developed as part of the **Full Stack Developer Intern – Technical Screening Assignment**.
+---
+
+## 🧑‍💻 Steps to Run the Project Locally
+
+## list of environment variable for the backend
+
+```bash
+PORT=5000
+MONGODB_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret_key
+
+
+### Prerequisites
+Make sure the following are installed on your system:
+- Node.js (v18 or above)
+- npm
+- Git
+- MongoDB Atlas account (or local MongoDB)
 
 ---
+
+### Step 1: Clone the Repository
+```bash
+git clone <your-github-repository-url>
+cd Mini-Event-Platform
+cd server
+npm install
+
+
 
 ## 🛠 Tech Stack
 ### Frontend
